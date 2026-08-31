@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amsalu Tamene — Medical Assistant</title>
+<meta name="description" content="Amsalu Tamene, Medical Assistant. Portfolio and career story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#D8D1C5;
+    --ink:#191714;
+    --accent:#F0F15E;
+    --ink-soft:rgba(25,23,20,0.62);
+    --ink-faint:rgba(25,23,20,0.16);
+    --card:rgba(255,255,255,0.38);
+    --card-border:rgba(255,255,255,0.55);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Archivo Black',system-ui,-apple-system,sans-serif;
+    font-weight:400;
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 32px; }
+
+  .eyebrow{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+    display:block;
+  }
+
+  .hr{
+    height:1px;
+    background:var(--ink-faint);
+    border:none;
+    margin:0;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(216,209,197,0.82);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--ink-faint);
+  }
+  .nav-inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-name{
+    font-family:'Archivo Black',sans-serif;
+    font-size:1rem;
+    letter-spacing:-0.01em;
+  }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .nav-links a{
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%; height:2px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.35s var(--ease);
+  }
+  .nav-links a:hover::after{ transform:scaleX(1); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:150px 0 130px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 9vw, 8rem);
+    margin-bottom:28px;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero .sub{
+    max-width:640px;
+    font-size:clamp(1.05rem, 1.6vw, 1.35rem);
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .hero .sub strong{ color:var(--ink); font-weight:700; }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:120px 0; }
+  section.tight-top{ padding-top:0; }
+
+  .section-head{ margin-bottom:56px; max-width:760px; }
+  .section-head h2{
+    font-size:clamp(2rem, 4.5vw, 3.6rem);
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-body{
+    font-size:clamp(1.05rem, 1.6vw, 1.3rem);
+    max-width:760px;
+    color:var(--ink);
+  }
+  .about-body p{ margin:0 0 22px; }
+  .about-body p:last-child{ margin-bottom:0; }
+  .about-langs{
+    margin-top:44px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:9px 18px;
+    border-radius:999px;
+    background:var(--accent);
+    color:var(--ink);
+  }
+
+  /* ---------- EXPERIENCE / PROJECTS ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:34px 28px;
+    transition:transform 0.35s var(--ease);
+  }
+  .card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    box-shadow:0 22px 40px rgba(25,23,20,0.16);
+    opacity:0;
+    transition:opacity 0.35s var(--ease);
+    pointer-events:none;
+  }
+  .card:hover{ transform:translateY(-4px); }
+  .card:hover::after{ opacity:1; }
+  .card .tag{
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+    display:block;
+  }
+  .card h3{
+    font-family:'Hanken Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    margin-bottom:12px;
+    line-height:1.2;
+  }
+  .card p{
+    font-size:0.96rem;
+    color:var(--ink-soft);
+    margin:0;
+    line-height:1.55;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding:130px 0 70px;
+  }
+  footer .eyebrow{ margin-bottom:22px; }
+  footer h2{
+    font-size:clamp(2.6rem, 8vw, 6rem);
+    margin-bottom:36px;
+  }
+  .email-link{
+    display:inline-block;
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(1.3rem, 3.6vw, 2.2rem);
+    color:var(--accent);
+    position:relative;
+    padding-bottom:6px;
+    -webkit-text-stroke:0.4px var(--ink);
+  }
+  .email-link::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%; height:3px;
+    background:var(--ink);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.4s var(--ease);
+  }
+  .email-link:hover::after{ transform:scaleX(1); }
+
+  .foot-meta{
+    margin-top:64px;
+    padding-top:28px;
+    border-top:1px solid var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- SKILLS MARQUEE ---------- */
+  .marq{
+    overflow:hidden;
+    border-top:1px solid var(--ink-faint);
+    border-bottom:1px solid var(--ink-faint);
+    padding:20px 0;
+  }
+  .marq .track{
+    display:flex;
+    width:max-content;
+    animation:marq 28s linear infinite;
+    will-change:transform;
+  }
+  .marq:hover .track{ animation-play-state:paused; }
+  .mtxt{
+    font-family:'Archivo Black',sans-serif;
+    font-size:1.05rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    padding-right:16px;
+  }
+  .mtxt em{
+    font-style:normal;
+    color:var(--accent);
+    -webkit-text-stroke:0.5px var(--ink);
+  }
+  @keyframes marq{ to{ transform:translateX(-50%); } }
+
+  /* ---------- REFERENCES ---------- */
+  .refs{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .ref{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:30px 26px;
+    transition:transform 0.35s var(--ease);
+  }
+  .ref:hover{ transform:translateY(-4px); }
+  .ref h3{
+    font-family:'Hanken Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.1rem;
+    margin-bottom:8px;
+    line-height:1.2;
+  }
+  .ref p{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    margin:0;
+    line-height:1.5;
+  }
+  .ref .rc{
+    margin-top:14px;
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .faq details{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-radius:16px;
+    transition:box-shadow 0.3s var(--ease);
+  }
+  .faq details[open]{ box-shadow:0 16px 34px rgba(25,23,20,0.12); }
+  .faq summary{
+    cursor:pointer;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:20px 24px;
+    font-weight:700;
+    font-size:1rem;
+  }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{
+    content:"+";
+    font-family:'Archivo Black',sans-serif;
+    color:var(--ink);
+    background:var(--accent);
+    border-radius:8px;
+    width:26px; height:26px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform 0.3s var(--ease);
+  }
+  .faq details[open] summary::after{ transform:rotate(45deg); }
+  .faq .bd{
+    padding:0 24px 22px;
+    font-size:0.96rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .faq details[open] .bd{ animation:fadeDown 0.35s var(--ease); }
+  @keyframes fadeDown{ from{ opacity:0; transform:translateY(-6px); } }
+
+  @media (max-width: 780px){
+    .nav-links{ gap:18px; }
+    .nav-links a{ font-size:0.68rem; }
+    .cards{ grid-template-columns:1fr; }
+    .refs{ grid-template-columns:1fr; }
+    .faq{ grid-template-columns:1fr; }
+    section{ padding:80px 0; }
+    .hero{ padding:100px 0 80px; }
+    .wrap{ padding:0 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition-duration:0.01ms !important; animation-duration:0.01ms !important; scroll-behavior:auto !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amsalu Tamene</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Experience</a></li>
+      <li><a href="#refs">References</a></li>
+      <li><a href="#faq">Q&amp;A</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Medical Assistant · Revere, MA</span>
+    <h1 class="reveal"><span class="accent">Amsalu</span> Tamene</h1>
+    <p class="sub reveal">Medical Assistant at <strong>MGH Primary Care</strong>, completing a Medical Assisting program at <strong>Lincoln Technical Institute</strong>. Fluent in English, Amharic, and Afaan Oromoo.</p>
+  </div>
+</header>
+
+<div class="marq"><div class="track" id="mtrack"><span class="mtxt">Patient Care <em>✦</em> Vital Signs <em>✦</em> EHR Documentation <em>✦</em> Vaccine Administration <em>✦</em> Bilingual Communication <em>✦</em> Clinical Support <em>✦</em>&nbsp;</span></div></div>
+
+<hr class="hr">
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">01 — About</span>
+      <h2>Background</h2>
+    </div>
+    <div class="about-body reveal">
+      <p>I'm a Medical Assistant currently working at <strong>MGH Primary Care</strong>, while completing my Medical Assisting program at <strong>Lincoln Technical Institute</strong>. My path into healthcare in the U.S. followed clinical experience earlier in <strong>Ethiopia</strong>, and a period of non-clinical work in the Boston area before I moved back into direct patient care.</p>
+      <p>That mix — hands-on clinical work in a different healthcare system, plus time spent in Boston-area roles outside of medicine — shapes how I work now: adaptable, detail-focused, and comfortable moving between administrative and clinical tasks in a busy primary care setting.</p>
+    </div>
+    <div class="about-langs reveal">
+      <span class="chip">English</span>
+      <span class="chip">Amharic</span>
+      <span class="chip">Afaan Oromoo</span>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">02 — Experience</span>
+      <h2>Where the work happens</h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <span class="tag">Current</span>
+        <h3>MGH Primary Care</h3>
+        <p>Working as a Medical Assistant, supporting clinical and administrative care in a primary care setting.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Foundation</span>
+        <h3>Clinical Experience — Ethiopia</h3>
+        <p>Earlier clinical experience in Ethiopia, before continuing my healthcare career in the Boston area.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Before Healthcare</span>
+        <h3>Boston-Area Roles</h3>
+        <p>Non-clinical work in the Boston area that came before my move into medical assisting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section id="refs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">03 — References</span>
+      <h2>People I&rsquo;ve worked with</h2>
+    </div>
+    <div class="refs">
+      <div class="ref reveal">
+        <h3>Fatima Naboulsi</h3>
+        <p>Medical Assistant · MGH Primary Care, Revere</p>
+        <p class="rc">Contact on request</p>
+      </div>
+      <div class="ref reveal">
+        <h3>Yolanda Fernandez</h3>
+        <p>Lead Medical Assistant · MGH Primary Care, Revere</p>
+        <p class="rc">Contact on request</p>
+      </div>
+      <div class="ref reveal">
+        <h3>Jennifer Velasquez</h3>
+        <p>Medical Assistant · MGH Primary Care, Revere</p>
+        <p class="rc">Contact on request</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">04 — Quick Answers</span>
+      <h2>You&rsquo;d ask anyway</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>When can you start?</summary>
+        <div class="bd">Two weeks&rsquo; notice from an offer.</div>
+      </details>
+      <details>
+        <summary>Salary expectations?</summary>
+        <div class="bd">Open to discussion based on the full role.</div>
+      </details>
+      <details>
+        <summary>Open to relocation or remote?</summary>
+        <div class="bd">Local to the Revere/Boston area — looking for roles in my city.</div>
+      </details>
+      <details>
+        <summary>Languages you speak?</summary>
+        <div class="bd">English (fluent), Amharic (fluent), Afaan Oromoo (native).</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="eyebrow reveal">05 — Contact</span>
+    <h2 class="reveal">Let's connect.</h2>
+    <a class="email-link reveal" href="mailto:amsalutamene4@gmail.com">amsalutamene4@gmail.com</a>
+    <div class="foot-meta">
+      <span>Amsalu Tamene</span>
+      <span>Revere, MA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var t = document.getElementById('mtrack');
+    if(t && t.firstElementChild){
+      var c = t.firstElementChild.cloneNode(true);
+      c.setAttribute('aria-hidden','true');
+      t.appendChild(c);
+    }
+  })();
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
